@@ -1,24 +1,25 @@
 # Handover — flowsk8 — 18 juli 2026
 
 ## Current status
-v1 gebouwd en getest in de browser. De spec komt uit `Flowsk8.pages` (Willems wensen).
-Werkt: filmen (camera + opname), clips opslaan met trick/obstakel/geland, bibliotheek met
-filters (trick, obstakel, alleen geland), trimmen + downloaden, camerahoek-tips (per
-obstakel + tip na elke opname). UI is Nederlands, donker skate-thema, mobiel-eerst.
+v1 gebouwd, als PWA installeerbaar gemaakt en live op **https://bartwitte.github.io/flowsk8/**.
+Repo: https://github.com/bartwitte/flowsk8 (publiek; Willems spec-document staat in .gitignore).
 
-Getest via de Browser pane met synthetische testclips (daarna weer verwijderd): bibliotheek,
-filters, speler, trimmen en tips-tab werken. Camera-opname zelf kon in de test-pane niet
-(permissies geblokkeerd) — de foutmelding + "Opnieuw proberen" werkt wel. Nog testen op
-echte localhost/telefoon.
+Werkt: filmen, clips opslaan met trick/obstakel/geland, bibliotheek met filters, trimmen
+(Chrome: her-encoderen; iPhone/Safari: soft trim met knippunten — getest door captureStream
+uit te schakelen), downloaden, camerahoek-tips, offline via service worker, app-iconen.
+
+Sessieherstart halverwege de PWA-verbouwing: staat gecontroleerd, niets verloren gegaan.
 
 ## Open tasks
-- [ ] Camera-opname testen op echt apparaat (Chrome, localhost of https)
-- [ ] Aan Willem laten zien; feedback verwerken
-- [ ] Ideeën voor later staan in tasks/todo.md (slow-motion, spots, delen, echte angle-analyse)
+- [ ] Op Willems iPhone installeren (Safari → Deel → "Zet op beginscherm") en camera testen
+- [ ] Feedback van Willem verwerken
+- [ ] Ideeën voor later in tasks/todo.md (slow-motion, spots, delen, echte angle-analyse)
 
 ## Blocked
 Nothing.
 
 ## Context for next session
-Start met CLAUDE.md. App draaien: `python3 -m http.server 8080 --directory app` en open
-http://localhost:8080. Geen git-repo — overweeg `git init` bij de volgende sessie.
+Deploy: push naar main, dan `git subtree push --prefix app origin gh-pages`.
+Bij wijzigingen aan app-bestanden: CACHE-versie in app/sw.js ophogen, anders zien
+geïnstalleerde apps de update pas laat. GitHub-token kan geen Actions-workflows pushen
+(geen workflow-scope) — daarom de gh-pages-route.

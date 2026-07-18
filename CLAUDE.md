@@ -18,6 +18,11 @@ en groot/simpel.
 # Lokaal draaien (camera werkt op localhost)
 python3 -m http.server 8080 --directory app
 # Open http://localhost:8080
+
+# Deployen naar GitHub Pages (na commit op main)
+git push origin main
+git subtree push --prefix app origin gh-pages
+# Live op https://bartwitte.github.io/flowsk8/
 ```
 
 ## Architecture
@@ -29,10 +34,17 @@ python3 -m http.server 8080 --directory app
 - `app/js/tips.js` — camerahoek-tips per obstakel
 
 ## Gotchas
-- Camera en captureStream vereisen localhost of https; richt op Chrome (Safari's
-  video.captureStream is beperkt).
-- Trimmen her-encodeert door de selectie af te spelen; duurt even zo lang als de selectie.
+- Camera en captureStream vereisen localhost of https.
+- Trimmen: Chrome her-encodeert via captureStream (duurt zo lang als de selectie);
+  Safari/iPhone kan dat niet — daar slaan we knippunten op ("soft trim", ✂ op de kaart)
+  en speelt de speler alleen de selectie af. Download geeft dan wel de hele video.
+- PWA: service worker cachet de app-shell (sw.js); bij wijzigingen CACHE-versie ophogen.
 - Alles staat lokaal in IndexedDB — cache wissen = clips kwijt. Download belangrijke clips.
+- Willems telefoon is een iPhone: installeren via Safari → Deel → "Zet op beginscherm".
+- GitHub-token heeft geen `workflow`-scope: geen Actions-workflows pushen; deploy gaat
+  via de gh-pages branch (subtree, zie Dev commands).
+- `Flowsk8.pages` (Willems spec) staat bewust in .gitignore — repo is publiek.
 
 ## Git workflow
-Nog geen git-repo. Bij init: main + feature branches, Nederlandse commit-messages.
+Repo: https://github.com/bartwitte/flowsk8 (publiek, main + feature branches,
+Nederlandse commit-messages). Hosting: GitHub Pages vanaf de gh-pages branch.

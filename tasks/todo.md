@@ -9,6 +9,12 @@
 - [x] Tips: camerahoek-tips per obstakel, tip na elke opname
 - [x] Testen in browser (camera-opname nog op echt apparaat testen)
 
+## v1.1 — installeerbare app (18 juli)
+- [x] PWA: manifest, service worker (offline), app-iconen
+- [x] iPhone-trimfallback (soft trim met knippunten)
+- [x] Git-repo + GitHub Pages: https://bartwitte.github.io/flowsk8/
+- [ ] Installeren + camera testen op Willems iPhone
+
 ## Later (ideeën)
 - [ ] Slow-motion afspelen bij het editen
 - [ ] Spots (plekken) als extra label

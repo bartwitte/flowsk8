@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>flowsk8</title>
+<meta name="theme-color" content="#101014">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="flowsk8">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛹</text></svg>">
+</head>
+<body>
+<header class="topbar">
+  <h1>FLOW<span>SK8</span></h1>
+</header>
+
+<main>
+  <!-- FILMEN -->
+  <section id="tab-filmen" class="tab active">
+    <div id="cam-wrap">
+      <video id="cam-preview" autoplay muted playsinline></video>
+      <div id="cam-error" class="hidden">
+        <p>📷 Camera niet beschikbaar.<br>Geef toestemming of open de app op <b>localhost</b> / https.</p>
+        <button id="cam-retry" class="btn">Opnieuw proberen</button>
+      </div>
+      <div id="rec-timer" class="hidden">● 0:00</div>
+      <button id="btn-flip" title="Camera wisselen">🔄</button>
+    </div>
+    <div class="cam-controls">
+      <button id="btn-record" aria-label="Opnemen"><span></span></button>
+    </div>
+
+    <!-- Opslaan-paneel na opname -->
+    <div id="save-panel" class="panel hidden">
+      <h2>Nice! Sla je clip op</h2>
+      <video id="save-preview" controls playsinline></video>
+      <label class="field">
+        <span>Welke trick?</span>
+        <input id="save-trick" list="trick-list" placeholder="bijv. kickflip" autocomplete="off">
+        <datalist id="trick-list">
+          <option value="ollie"><option value="kickflip"><option value="heelflip">
+          <option value="tre flip"><option value="pop shove-it"><option value="varial flip">
+          <option value="50-50 grind"><option value="boardslide"><option value="5-0 grind">
+          <option value="nosegrind"><option value="crooked grind"><option value="manual">
+        </datalist>
+      </label>
+      <div class="field">
+        <span>Waar?</span>
+        <div id="save-obstacles" class="chips">
+          <button class="chip" data-v="flat">Flat</button>
+          <button class="chip" data-v="ledge">Ledge</button>
+          <button class="chip" data-v="rail">Rail</button>
+          <button class="chip" data-v="stairs">Trap</button>
+          <button class="chip" data-v="transition">Transition</button>
+        </div>
+      </div>
+      <label class="landed-toggle">
+        <input type="checkbox" id="save-landed">
+        <span>✔ Geland — clean weggerold</span>
+      </label>
+      <div class="row">
+        <button id="save-discard" class="btn ghost">Weggooien</button>
+        <button id="save-confirm" class="btn primary">Opslaan</button>
+      </div>
+    </div>
+
+    <!-- Tip na opslaan -->
+    <div id="after-tip" class="panel hidden">
+      <h2>Opgeslagen! 🛹</h2>
+      <div class="tip-card"><p id="after-tip-text"></p></div>
+      <div class="row">
+        <button id="after-again" class="btn primary">Nog een clip</button>
+        <button id="after-to-clips" class="btn ghost">Naar clips</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIPS -->
+  <section id="tab-clips" class="tab">
+    <div class="filters">
+      <select id="filter-trick"><option value="">Alle tricks</option></select>
+      <div id="filter-obstacles" class="chips">
+        <button class="chip" data-v="flat">Flat</button>
+        <button class="chip" data-v="ledge">Ledge</button>
+        <button class="chip" data-v="rail">Rail</button>
+        <button class="chip" data-v="stairs">Trap</button>
+        <button class="chip" data-v="transition">Transition</button>
+      </div>
+      <label class="landed-toggle small">
+        <input type="checkbox" id="filter-landed">
+        <span>✔ Alleen geland</span>
+      </label>
+    </div>
+    <div id="clip-grid"></div>
+    <p id="clips-empty" class="empty hidden">Nog geen clips. Ga filmen! 🎥</p>
+  </section>
+
+  <!-- TIPS -->
+  <section id="tab-tips" class="tab">
+    <h2>Camerahoek-tips</h2>
+    <div id="tips-list"></div>
+  </section>
+</main>
+
+<!-- Speler / editor overlay -->
+<div id="player-overlay" class="overlay hidden">
+  <div class="overlay-inner">
+    <button id="player-close" class="close">✕</button>
+    <video id="player-video" controls playsinline></video>
+    <div id="player-meta"></div>
+    <div id="trim-panel" class="hidden">
+      <h3>Trimmen</h3>
+      <div class="trim-sliders">
+        <label>Start <input type="range" id="trim-start" min="0" value="0" step="0.05"></label>
+        <label>Eind <input type="range" id="trim-end" min="0" value="0" step="0.05"></label>
+      </div>
+      <p id="trim-info"></p>
+      <div class="row">
+        <button id="trim-preview" class="btn ghost">▶ Selectie afspelen</button>
+        <button id="trim-save" class="btn primary">✂ Trim opslaan als nieuwe clip</button>
+      </div>
+      <p id="trim-status" class="hidden"></p>
+    </div>
+    <div class="row player-actions">
+      <button id="player-trim" class="btn">✂ Editen</button>
+      <button id="player-landed" class="btn">✔ Geland</button>
+      <button id="player-download" class="btn">⬇ Download</button>
+      <button id="player-delete" class="btn danger">🗑 Weg</button>
+    </div>
+  </div>
+</div>
+
+<nav class="tabbar">
+  <button data-tab="filmen" class="active">🎥<span>Filmen</span></button>
+  <button data-tab="clips">🛹<span>Clips</span></button>
+  <button data-tab="tips">💡<span>Tips</span></button>
+</nav>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -15,6 +15,14 @@
 - [x] Git-repo + GitHub Pages: https://bartwitte.github.io/flowsk8/
 - [ ] Installeren + camera testen op Willems iPhone
 
+## v2 — de game (18 juli)
+- [x] Street skills: gelande clips → unlocks (skills.js)
+- [x] Gear: deck/lagers/wielen/griptape met echte physics-invloed, hard/zacht wielen
+- [x] Skate-runner (canvas): ollie, tricks in de lucht, slipkans, 5 levels
+- [x] Levels vereisen offline bewijs (bijv. kickflip geland voor level 3)
+- [x] Unlock-melding na het opslaan van een gelande clip
+- [ ] Game op Willems iPhone testen (touch-besturing)
+
 ## Later (ideeën)
 - [ ] Slow-motion afspelen bij het editen
 - [ ] Spots (plekken) als extra label

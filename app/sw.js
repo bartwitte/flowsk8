@@ -1,4 +1,4 @@
-const CACHE = 'flowsk8-v1';
+const CACHE = 'flowsk8-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -9,6 +9,9 @@ const ASSETS = [
   './js/library.js',
   './js/editor.js',
   './js/tips.js',
+  './js/skills.js',
+  './js/gear.js',
+  './js/game.js',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',

@@ -1,14 +1,17 @@
 # Handover — flowsk8 — 18 juli 2026
 
 ## Current status
-v1 gebouwd, als PWA installeerbaar gemaakt en live op **https://bartwitte.github.io/flowsk8/**.
+v2: game toegevoegd. Live op **https://bartwitte.github.io/flowsk8/**.
 Repo: https://github.com/bartwitte/flowsk8 (publiek; Willems spec-document staat in .gitignore).
 
-Werkt: filmen, clips opslaan met trick/obstakel/geland, bibliotheek met filters, trimmen
-(Chrome: her-encoderen; iPhone/Safari: soft trim met knippunten — getest door captureStream
-uit te schakelen), downloaden, camerahoek-tips, offline via service worker, app-iconen.
+v1 werkt: filmen, clips met trick/obstakel/geland, filters, trimmen (iPhone: soft trim),
+downloaden, tips, PWA (offline, installeerbaar).
 
-Sessieherstart halverwege de PWA-verbouwing: staat gecontroleerd, niets verloren gegaan.
+v2 (Willems game-idee): street skills (gelande clips) unlocken gear en levels in een
+canvas skate-runner. Gear stuurt de physics (deck→pop, lagers→snelheid, griptape→slipkans,
+wielen hard/zacht). Levels 3-5 vereisen echt straatbewijs. Getest in de browser met
+seed-clips: unlocks, setup, levelpoorten en de runner werken; testdata weer gewist.
+Let op: gameloop heeft een timer-fallback omdat rAF in de test-pane niet vuurt.
 
 ## Open tasks
 - [ ] Op Willems iPhone installeren (Safari → Deel → "Zet op beginscherm") en camera testen

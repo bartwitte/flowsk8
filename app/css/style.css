@@ -248,6 +248,125 @@ button, .chip { touch-action: manipulation; -webkit-tap-highlight-color: transpa
 #trim-info { font-size: 14px; color: var(--muted); }
 #trim-status { color: var(--accent); font-weight: 700; }
 
+/* ---- Game ---- */
+.game-nav { margin-bottom: 14px; }
+
+#level-list { display: flex; flex-direction: column; gap: 10px; }
+.level-card {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+}
+.level-card.locked { opacity: .55; }
+.level-card .level-nr { font-size: 24px; }
+.level-card .level-info { display: flex; flex-direction: column; gap: 2px; }
+.level-card small { color: var(--muted); }
+
+#game-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #16161d;
+}
+#game-canvas { display: block; width: 100%; height: auto; touch-action: none; }
+#game-hud {
+  position: absolute; top: 8px; left: 10px; right: 44px;
+  display: flex; gap: 14px;
+  font-weight: 800; font-size: 15px;
+  text-shadow: 0 1px 3px #000;
+  pointer-events: none;
+}
+#game-hud .combo { color: var(--accent); }
+#game-stop {
+  position: absolute; top: 6px; right: 6px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.5);
+  color: var(--text);
+  cursor: pointer;
+}
+#game-einde {
+  position: absolute; inset: 0;
+  background: rgba(16,16,20,.88);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; text-align: center; padding: 16px;
+}
+#game-einde .einde-score { font-size: 22px; font-weight: 900; color: var(--accent); }
+#game-einde .einde-sub { color: var(--muted); max-width: 420px; line-height: 1.4; }
+#game-einde .einde-sub b { color: var(--accent); }
+#game-einde .row { width: 100%; max-width: 360px; }
+
+.game-controls { display: flex; gap: 10px; margin-top: 12px; align-items: stretch; }
+#btn-jump { flex: 0 0 130px; font-size: 18px; min-height: 58px; }
+#trick-buttons { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+.trick-btn { flex: 1 1 40%; min-height: 58px; font-size: 14px; padding: 8px; }
+.trick-hint { color: var(--muted); font-size: 14px; align-self: center; }
+.game-uitleg { color: var(--muted); font-size: 13px; margin-top: 10px; text-align: center; }
+
+.gear-kop {
+  margin: 18px 0 8px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+.gear-chip.locked { opacity: .5; cursor: not-allowed; }
+.gear-req { flex-basis: 100%; color: var(--muted); font-size: 12px; margin: -2px 0 4px 6px; }
+
+.stats-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 6px; }
+.stat-bar span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.stat-bar .bar {
+  height: 12px; border-radius: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.stat-bar .bar div { height: 100%; background: var(--accent); border-radius: 6px; transition: width .3s; }
+
+.skill-totalen {
+  display: flex; gap: 10px;
+}
+.skill-totalen div {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 8px;
+  text-align: center;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.skill-totalen b { font-size: 26px; color: var(--accent); }
+.skill-totalen span { font-size: 12px; color: var(--muted); }
+.trick-lijst { list-style: none; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.trick-lijst b { color: var(--text); }
+.unlock-card {
+  background: var(--panel);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+.unlock-card small { color: var(--muted); }
+.unlock-card p { color: var(--green); font-size: 14px; margin-top: 4px; }
+#game-view-skills > .btn { width: 100%; margin-top: 14px; }
+
+#after-unlocks {
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(61, 220, 132, .08);
+}
+#after-unlocks b { color: var(--green); }
+#after-unlocks ul { list-style: none; margin-top: 6px; }
+
 /* ---- Tabbar ---- */
 .tabbar {
   position: fixed; bottom: 0; left: 0; right: 0;

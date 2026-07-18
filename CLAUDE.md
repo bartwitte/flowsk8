@@ -26,12 +26,22 @@ git subtree push --prefix app origin gh-pages
 ```
 
 ## Architecture
-- `app/index.html` — één pagina met drie tabs: Filmen, Clips, Tips
+- `app/index.html` — één pagina met vier tabs: Filmen, Clips, Game, Tips
 - `app/js/db.js` — IndexedDB-laag (clips: blob, trick, obstakel, geland, thumb)
-- `app/js/camera.js` — opnemen + na opname trick/obstakel/geland invullen
+- `app/js/camera.js` — opnemen + na opname trick/obstakel/geland invullen + unlock-melding
 - `app/js/library.js` — cliplijst met filters (trick, obstakel, alleen geland)
 - `app/js/editor.js` — trimmen (in/uit-punt, opnieuw opnemen via captureStream) + download
 - `app/js/tips.js` — camerahoek-tips per obstakel
+- `app/js/skills.js` — street skills uit gelande clips + requirement-checker (checkReq/describeReq)
+- `app/js/gear.js` — gear-catalogus (deck/lagers/wielen/griptape), unlocks, setup, stats
+- `app/js/game.js` — canvas skate-runner: levels met offline-bewijs, physics uit gear-stats
+
+## Game-concept (Willems idee)
+Offline (street) skills unlocken de online game. Clips die "geland" gemarkeerd zijn tellen:
+per trick, aantal clips, verschillende tricks, en obstakel (ledge/rail telt als grind).
+Gear beïnvloedt de game-physics: deck→pop (springhoogte), lagers→snelheid, griptape→slipkans,
+wielen→grip + hard/zacht af te stellen (hard = sneller maar slipperiger). Levels vereisen
+naast het vorige level ook echt straatbewijs (bijv. level 3: land een kickflip of heelflip).
 
 ## Gotchas
 - Camera en captureStream vereisen localhost of https.

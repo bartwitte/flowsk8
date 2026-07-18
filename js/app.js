@@ -1,6 +1,7 @@
 import { initCamera, startCamera, stopCamera, setOnSaved } from './camera.js';
 import { initLibrary, refreshLibrary, toggleLanded, removeClip } from './library.js';
 import { initEditor } from './editor.js';
+import { initGame, refreshGame, stopGame } from './game.js';
 import { TIPS, OBSTACLE_LABELS } from './tips.js';
 
 const tabs = document.querySelectorAll('.tabbar button');
@@ -12,6 +13,8 @@ function showTab(name) {
   if (name === 'filmen') startCamera();
   else stopCamera();
   if (name === 'clips') refreshLibrary();
+  if (name === 'game') refreshGame();
+  else stopGame();
 }
 
 tabs.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
@@ -39,5 +42,6 @@ if ('serviceWorker' in navigator) {
 initCamera();
 initLibrary();
 initEditor({ onRefresh: refreshLibrary, onToggleLanded: toggleLanded, onRemove: removeClip });
+initGame();
 setOnSaved(refreshLibrary);
 startCamera();

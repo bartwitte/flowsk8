@@ -1,5 +1,7 @@
 import { saveClip } from './db.js';
 import { randomTip } from './tips.js';
+import { getStreetSkills } from './skills.js';
+import { allUnlocks } from './gear.js';
 
 const preview = document.getElementById('cam-preview');
 const camError = document.getElementById('cam-error');
@@ -141,6 +143,7 @@ export function makeThumb(blob, time = 0.1) {
 async function confirmSave() {
   if (!pendingBlob) return;
   const obstacle = selectedObstacle();
+  const skillsVoor = await getStreetSkills();
   const thumb = await makeThumb(pendingBlob);
   const clip = {
     id: crypto.randomUUID(),
@@ -158,6 +161,21 @@ async function confirmSave() {
   URL.revokeObjectURL(savePreview.src);
   savePanel.classList.add('hidden');
   afterTipText.innerHTML = randomTip(obstacle);
+
+  // nieuwe game-unlocks door deze clip? (street skills → gear/tricks)
+  const unlocksEl = document.getElementById('after-unlocks');
+  unlocksEl.classList.add('hidden');
+  if (clip.landed) {
+    const skillsNa = await getStreetSkills();
+    const voor = new Set(allUnlocks(skillsVoor).filter(u => u.unlocked).map(u => u.naam));
+    const nieuw = allUnlocks(skillsNa).filter(u => u.unlocked && !voor.has(u.naam));
+    if (nieuw.length) {
+      unlocksEl.innerHTML = '<b>🔓 Unlocked in de game:</b><ul>' +
+        nieuw.map(u => `<li>${u.naam} <small>(${u.soort})</small></li>`).join('') + '</ul>';
+      unlocksEl.classList.remove('hidden');
+    }
+  }
+
   afterTip.classList.remove('hidden');
   if (onSaved) onSaved();
 }

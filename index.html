@@ -72,6 +72,7 @@
     <!-- Tip na opslaan -->
     <div id="after-tip" class="panel hidden">
       <h2>Opgeslagen! 🛹</h2>
+      <div id="after-unlocks" class="hidden"></div>
       <div class="tip-card"><p id="after-tip-text"></p></div>
       <div class="row">
         <button id="after-again" class="btn primary">Nog een clip</button>
@@ -98,6 +99,35 @@
     </div>
     <div id="clip-grid"></div>
     <p id="clips-empty" class="empty hidden">Nog geen clips. Ga filmen! 🎥</p>
+  </section>
+
+  <!-- GAME -->
+  <section id="tab-game" class="tab">
+    <div id="game-nav" class="chips game-nav">
+      <button class="chip active" data-view="spelen">🎮 Spelen</button>
+      <button class="chip" data-view="setup">🛠 Mijn setup</button>
+      <button class="chip" data-view="skills">🔥 Street skills</button>
+    </div>
+
+    <div id="game-view-spelen">
+      <div id="level-list"></div>
+      <div id="game-stage" class="hidden">
+        <div id="game-wrap">
+          <canvas id="game-canvas"></canvas>
+          <div id="game-hud"></div>
+          <div id="game-einde" class="hidden"></div>
+          <button id="game-stop" title="Stoppen">✕</button>
+        </div>
+        <div class="game-controls">
+          <button id="btn-jump" class="btn primary">⬆ OLLIE</button>
+          <div id="trick-buttons"></div>
+        </div>
+        <p class="game-uitleg">Tik op OLLIE (of de game) om te springen. Tik in de lucht op een trick voor extra punten!</p>
+      </div>
+    </div>
+
+    <div id="game-view-setup" class="hidden"></div>
+    <div id="game-view-skills" class="hidden"></div>
   </section>
 
   <!-- TIPS -->
@@ -138,6 +168,7 @@
 <nav class="tabbar">
   <button data-tab="filmen" class="active">🎥<span>Filmen</span></button>
   <button data-tab="clips">🛹<span>Clips</span></button>
+  <button data-tab="game">🎮<span>Game</span></button>
   <button data-tab="tips">💡<span>Tips</span></button>
 </nav>
 

@@ -272,21 +272,31 @@ function step(dt) {
     n.group.rotation.y = Math.atan2(richting.x, richting.z);
   }
 
-  // uitdaag-prompt
+  // uitdaag-prompt — maar één keer opbouwen per skater, anders wordt de knop
+  // elke frame vervangen en gaat een echte vingertik (iPhone) verloren
   if (dichtbij) {
     const alGewonnen = getWins()[dichtbij.id];
-    els.prompt.innerHTML = `<b>${dichtbij.emoji} ${dichtbij.naam}</b> ${alGewonnen ? '🏆' : ''}<br>
-      <button class="btn primary" id="daag-uit">🎮 Game of SKATE!</button>`;
+    const key = dichtbij.id + (alGewonnen ? '-w' : '');
+    if (els.prompt.dataset.key !== key) {
+      els.prompt.dataset.key = key;
+      els.prompt.innerHTML = `<b>${dichtbij.emoji} ${dichtbij.naam}</b> ${alGewonnen ? '🏆' : ''}<br>
+        <button class="btn primary" id="daag-uit">🎮 Game of SKATE!</button>`;
+      const uitdager = dichtbij;
+      const start = e => {
+        e.preventDefault();
+        if (!tricklist(skills).length) {
+          alert('Je tricklist is nog leeg!\n\nFilm een trick, land hem clean en markeer hem "geland" — dan kun je hem hier gebruiken. 🎥');
+          return;
+        }
+        naarBattle(uitdager);
+      };
+      const knop = document.getElementById('daag-uit');
+      knop.addEventListener('pointerdown', start);
+    }
     els.prompt.classList.remove('hidden');
-    document.getElementById('daag-uit').onclick = () => {
-      if (!tricklist(skills).length) {
-        alert('Je tricklist is nog leeg!\n\nFilm een trick, land hem clean en markeer hem "geland" — dan kun je hem hier gebruiken. 🎥');
-        return;
-      }
-      naarBattle(dichtbij);
-    };
   } else {
     els.prompt.classList.add('hidden');
+    delete els.prompt.dataset.key;
   }
 
   // camera volgt (vaste Brawl Stars-hoek)

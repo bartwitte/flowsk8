@@ -35,6 +35,8 @@ git subtree push --prefix app origin gh-pages
 - `app/js/skills.js` — street skills uit gelande clips + requirement-checker (checkReq/describeReq)
 - `app/js/gear.js` — gear-catalogus (deck/lagers/wielen/griptape), unlocks, setup, stats
 - `app/js/game.js` — canvas skate-runner: levels met offline-bewijs, physics uit gear-stats
+- `app/js/park.js` — Mega Skatepark (top-down) + game of SKATE tegen 3 NPC's; tricklist
+  en landingskans komen uit echte clips: kans = 25 + 12×min(clips,5) + 25×(geland÷pogingen)
 
 ## Game-concept (Willems idee)
 Offline (street) skills unlocken de online game. Clips die "geland" gemarkeerd zijn tellen:
@@ -53,6 +55,9 @@ naast het vorige level ook echt straatbewijs (bijv. level 3: land een kickflip o
   Safari/iPhone kan dat niet — daar slaan we knippunten op ("soft trim", ✂ op de kaart)
   en speelt de speler alleen de selectie af. Download geeft dan wel de hele video.
 - PWA: service worker cachet de app-shell (sw.js); bij wijzigingen CACHE-versie ophogen.
+  Precache fetcht met cache:'reload' — anders kan de sw oude HTTP-cache-kopieën insluiten.
+- Lokaal testen: browser-memory-cache kan oude modules vasthouden ondanks sw/cache wissen;
+  navigeer naar index.html?vers=x om vers te laden.
 - Alles staat lokaal in IndexedDB — cache wissen = clips kwijt. Download belangrijke clips.
 - Willems telefoon is een iPhone: installeren via Safari → Deel → "Zet op beginscherm".
 - GitHub-token heeft geen `workflow`-scope: geen Actions-workflows pushen; deploy gaat

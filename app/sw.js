@@ -1,4 +1,4 @@
-const CACHE = 'flowsk8-v3';
+const CACHE = 'flowsk8-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,7 @@ const ASSETS = [
   './js/skills.js',
   './js/gear.js',
   './js/game.js',
+  './js/park.js',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -19,7 +20,17 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  // cache: 'reload' → altijd vers van het netwerk, nooit een oude HTTP-cache-kopie
+  e.waitUntil(
+    caches.open(CACHE)
+      .then(c => Promise.all(ASSETS.map(url =>
+        fetch(new Request(url, { cache: 'reload' })).then(r => {
+          if (!r.ok) throw new Error(`precache ${url}: ${r.status}`);
+          return c.put(url, r);
+        })
+      )))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', e => {

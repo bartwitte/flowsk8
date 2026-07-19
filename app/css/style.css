@@ -377,6 +377,85 @@ button, .chip { touch-action: manipulation; -webkit-tap-highlight-color: transpa
 #after-unlocks b { color: var(--green); }
 #after-unlocks ul { list-style: none; margin-top: 6px; }
 
+/* ---- Mega Skatepark + game of SKATE ---- */
+#mode-kies { display: flex; flex-direction: column; gap: 12px; }
+.mode-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  color: var(--text);
+  font-size: 30px;
+  text-align: left;
+  cursor: pointer;
+}
+.mode-card span { display: flex; flex-direction: column; gap: 3px; }
+.mode-card b { font-size: 17px; }
+.mode-card small { color: var(--muted); font-size: 13px; }
+.mode-terug { margin-bottom: 10px; width: auto; padding: 8px 14px; min-height: 40px; font-size: 14px; }
+
+#park-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+#park-canvas { display: block; width: 100%; height: auto; touch-action: none; }
+#park-prompt {
+  position: absolute; left: 50%; bottom: 12px;
+  transform: translateX(-50%);
+  background: rgba(16,16,20,.92);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+#park-tricks { margin-top: 12px; }
+
+#skate-battle {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.battle-koppen {
+  display: flex; align-items: center; justify-content: space-between;
+  text-align: center; gap: 10px;
+}
+.battle-vs { color: var(--muted); font-weight: 900; }
+.skate-letters { display: flex; gap: 4px; margin-top: 6px; justify-content: center; }
+.skate-letters span {
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-weight: 900;
+  color: var(--border);
+}
+.skate-letters span.op { background: var(--red); border-color: var(--red); color: #fff; }
+.battle-log {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  min-height: 96px;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 4px;
+  font-size: 14px; line-height: 1.5;
+}
+.battle-log p { color: var(--muted); }
+.battle-log p:last-child { color: var(--text); }
+.battle-vraag { font-weight: 700; }
+.battle-wacht { text-align: center; color: var(--muted); font-size: 22px; }
+.battle-tricks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.trick-zet { display: flex; flex-direction: column; gap: 3px; padding: 10px; }
+.trick-zet small { color: var(--muted); font-weight: 400; font-size: 11px; }
+.battle-einde { text-align: center; display: flex; flex-direction: column; gap: 10px; }
+
 /* ---- Tabbar ---- */
 .tabbar {
   position: fixed; bottom: 0; left: 0; right: 0;

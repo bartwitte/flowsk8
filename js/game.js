@@ -2,7 +2,7 @@
 // met street skills (echt gelande, gefilmde tricks).
 import { getStreetSkills, checkReq, describeReq } from './skills.js';
 import { GEAR, GAME_TRICKS, getSetup, saveSetup, itemById, isUnlocked, validSetup, computeStats } from './gear.js';
-import { initPark, enterPark, leavePark } from './park.js';
+import { initPark, enterPark, leavePark } from './park3d.js';
 
 export const LEVELS = [
   { nr: 1, naam: 'Parkeerplaats', doel: 300, obstakels: ['pylon'], speedMult: 1.0, req: null },

@@ -395,13 +395,33 @@ button, .chip { touch-action: manipulation; -webkit-tap-highlight-color: transpa
 .mode-card small { color: var(--muted); font-size: 13px; }
 .mode-terug { margin-bottom: 10px; width: auto; padding: 8px 14px; min-height: 40px; font-size: 14px; }
 
-#park-wrap {
+#park3d-wrap {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border);
+  touch-action: none;
+  min-height: 200px;
+  background: #87c9f0;
 }
-#park-canvas { display: block; width: 100%; height: auto; touch-action: none; }
+#park3d-wrap canvas { display: block; }
+#joy-base {
+  position: absolute;
+  width: 108px; height: 108px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.12);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+#joy-knob {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255,214,10,.85);
+  transform: translate(-50%,-50%);
+}
 #park-prompt {
   position: absolute; left: 50%; bottom: 12px;
   transform: translateX(-50%);

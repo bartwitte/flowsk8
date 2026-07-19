@@ -45,6 +45,10 @@ naast het vorige level ook echt straatbewijs (bijv. level 3: land een kickflip o
 
 ## Gotchas
 - Camera en captureStream vereisen localhost of https.
+- iPhone-bug: de camera-track kan tijdens opname wegvallen ("capture failure") — beeld
+  bevriest, geluid loopt door. Mitigaties in camera.js: timeslice-opname (1s), wake lock,
+  track-'ended'-waakhond die de opname netjes stopt + waarschuwing toont. Triggers:
+  schermdimmen, telefoon draaien tijdens filmen, meldingen/app-wissel.
 - Trimmen: Chrome her-encodeert via captureStream (duurt zo lang als de selectie);
   Safari/iPhone kan dat niet — daar slaan we knippunten op ("soft trim", ✂ op de kaart)
   en speelt de speler alleen de selectie af. Download geeft dan wel de hele video.

@@ -26,6 +26,19 @@ let timerInterval = null;
 let pendingBlob = null;
 let pendingMime = '';
 let onSaved = null;
+let wakeLock = null;
+let captureFailed = false;
+
+// scherm wakker houden tijdens opnemen: schermdimmen kan op iPhone de
+// camera-track laten stilvallen (bevroren beeld, geluid loopt door)
+async function grabWakeLock() {
+  try { wakeLock = await navigator.wakeLock?.request('screen'); } catch { wakeLock = null; }
+}
+
+function releaseWakeLock() {
+  try { wakeLock?.release(); } catch { /* al weg */ }
+  wakeLock = null;
+}
 
 export function setOnSaved(fn) { onSaved = fn; }
 
@@ -43,7 +56,7 @@ export async function startCamera() {
   stopCamera();
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: facing, width: { ideal: 1280 }, height: { ideal: 720 } },
+      video: { facingMode: facing, width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30 } },
       audio: true,
     });
     preview.srcObject = stream;
@@ -85,21 +98,37 @@ function toggleRecord() {
     return;
   }
   chunks = [];
+  captureFailed = false;
   pendingMime = pickMime();
   recorder = new MediaRecorder(stream, pendingMime ? { mimeType: pendingMime } : undefined);
   recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
   recorder.onstop = () => {
     btnRecord.classList.remove('recording');
     stopTimer();
+    releaseWakeLock();
     pendingBlob = new Blob(chunks, { type: pendingMime || 'video/webm' });
     showSavePanel();
   };
-  recorder.start();
+  // waakhond: valt de camera-track weg (bekende iPhone-bug), stop dan
+  // meteen netjes — anders neem je bevroren beeld met doorlopend geluid op
+  const videoTrack = stream.getVideoTracks()[0];
+  if (videoTrack) {
+    videoTrack.addEventListener('ended', () => {
+      if (recorder && recorder.state === 'recording') {
+        captureFailed = true;
+        recorder.stop();
+      }
+    }, { once: true });
+  }
+  grabWakeLock();
+  recorder.start(1000); // per seconde een stukje: stabieler op iPhone, minder verlies bij fouten
   btnRecord.classList.add('recording');
   startTimer();
 }
 
 function showSavePanel() {
+  document.getElementById('save-warn').classList.toggle('hidden', !captureFailed);
+  if (captureFailed) startCamera(); // dode stream vervangen voor de volgende opname
   savePreview.src = URL.createObjectURL(pendingBlob);
   saveTrick.value = '';
   saveLanded.checked = false;

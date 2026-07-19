@@ -35,8 +35,12 @@ git subtree push --prefix app origin gh-pages
 - `app/js/skills.js` — street skills uit gelande clips + requirement-checker (checkReq/describeReq)
 - `app/js/gear.js` — gear-catalogus (deck/lagers/wielen/griptape), unlocks, setup, stats
 - `app/js/game.js` — canvas skate-runner: levels met offline-bewijs, physics uit gear-stats
-- `app/js/park.js` — Mega Skatepark (top-down) + game of SKATE tegen 3 NPC's; tricklist
-  en landingskans komen uit echte clips: kans = 25 + 12×min(clips,5) + 25×(geland÷pogingen)
+- `app/js/park3d.js` — Mega Skatepark in 3D (Three.js, vendored in app/lib): Brawl
+  Stars-camera + virtuele joystick, rondlopende bot-skaters (Bram/Sanne/Pim) die je
+  uitdaagt door tegen ze aan te lopen. Three.js laadt lazy bij het openen van het park.
+- `app/js/skate.js` — game of SKATE: tricklist en landingskans uit echte clips
+  (kans = 25 + 12×min(clips,5) + 25×(geland÷pogingen)); Willems regel: trick niet
+  unlockt (nooit geland gefilmd) = automatisch een letter — geldt voor beide kanten.
 
 ## Game-concept (Willems idee)
 Offline (street) skills unlocken de online game. Clips die "geland" gemarkeerd zijn tellen:

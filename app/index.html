@@ -113,7 +113,7 @@
     <div id="game-view-spelen">
       <div id="mode-kies">
         <button class="mode-card" id="mode-run">🏃 <span><b>Street Run</b><small>Spring over obstakels, haal levels</small></span></button>
-        <button class="mode-card" id="mode-park">🗺 <span><b>Mega Skatepark</b><small>Loop rond van bovenaf + game of SKATE</small></span></button>
+        <button class="mode-card" id="mode-park">🗺 <span><b>Mega Skatepark 3D</b><small>Loop rond met de joystick + game of SKATE</small></span></button>
       </div>
 
       <div id="run-mode" class="hidden">
@@ -136,12 +136,12 @@
 
       <div id="park-mode" class="hidden">
         <button class="btn ghost mode-terug" id="park-terug">← Andere modus</button>
-        <div id="park-wrap">
-          <canvas id="park-canvas"></canvas>
+        <div id="park3d-wrap">
           <div id="park-prompt" class="hidden"></div>
+          <div id="joy-base" class="hidden"><div id="joy-knob"></div></div>
         </div>
         <div id="park-tricks" class="chips"></div>
-        <p class="game-uitleg">Sleep over het park om te lopen (of pijltjestoetsen). Loop naar een skater voor een game of SKATE — tik onderweg op je tricks!</p>
+        <p class="game-uitleg">Duim op het scherm = joystick (of pijltjestoetsen). Loop tegen een skater aan voor een game of SKATE — tik onderweg op je tricks!</p>
       </div>
 
       <div id="skate-battle" class="hidden"></div>

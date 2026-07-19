@@ -30,6 +30,15 @@
 - [x] Sw-precache-fix: altijd vers van netwerk
 - [ ] Joystick-gevoel op echte iPhone testen
 
+## v4 — Mega Skatepark in 3D (19 juli, Willems idee)
+- [x] 3D-park met Three.js: quarter pipes, funbox, rails, trap, halfpipe, bomen
+- [x] Brawl Stars-besturing: virtuele joystick links (+ WASD/pijltjes op desktop)
+- [x] Rondlopende skaters; tegen ze aanlopen = uitdagen voor game of SKATE
+- [x] Willems regel: trick niet unlockt = automatisch een letter (beide kanten)
+- [ ] Echte online multiplayer (andere mensen) — vergt een spelserver + open internet
+      op Willems telefoon + veiligheidskeuzes; eerst met Bart bespreken
+- [ ] 3D-prestaties op Willems iPhone checken (three.js is 1,2 MB, laadt lazy)
+
 ## Later (ideeën)
 - [ ] Slow-motion afspelen bij het editen
 - [ ] Spots (plekken) als extra label

@@ -164,6 +164,16 @@ button, .chip { touch-action: manipulation; -webkit-tap-highlight-color: transpa
 .btn.ghost { background: transparent; }
 .btn.danger { color: var(--red); border-color: var(--red); }
 
+.save-warn {
+  border: 2px solid var(--red);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 92, 92, .08);
+  color: var(--red);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .tip-card {
   border: 2px dashed var(--accent);
   border-radius: 12px;

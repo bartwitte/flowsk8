@@ -1,4 +1,4 @@
-const CACHE = 'flowsk8-v2';
+const CACHE = 'flowsk8-v3';
 const ASSETS = [
   './',
   './index.html',

@@ -111,6 +111,13 @@
     </div>
 
     <div id="game-view-spelen">
+      <div id="mode-kies">
+        <button class="mode-card" id="mode-run">🏃 <span><b>Street Run</b><small>Spring over obstakels, haal levels</small></span></button>
+        <button class="mode-card" id="mode-park">🗺 <span><b>Mega Skatepark</b><small>Loop rond van bovenaf + game of SKATE</small></span></button>
+      </div>
+
+      <div id="run-mode" class="hidden">
+      <button class="btn ghost mode-terug" id="run-terug">← Andere modus</button>
       <div id="level-list"></div>
       <div id="game-stage" class="hidden">
         <div id="game-wrap">
@@ -125,6 +132,19 @@
         </div>
         <p class="game-uitleg">Tik op OLLIE (of de game) om te springen. Tik in de lucht op een trick voor extra punten!</p>
       </div>
+      </div>
+
+      <div id="park-mode" class="hidden">
+        <button class="btn ghost mode-terug" id="park-terug">← Andere modus</button>
+        <div id="park-wrap">
+          <canvas id="park-canvas"></canvas>
+          <div id="park-prompt" class="hidden"></div>
+        </div>
+        <div id="park-tricks" class="chips"></div>
+        <p class="game-uitleg">Sleep over het park om te lopen (of pijltjestoetsen). Loop naar een skater voor een game of SKATE — tik onderweg op je tricks!</p>
+      </div>
+
+      <div id="skate-battle" class="hidden"></div>
     </div>
 
     <div id="game-view-setup" class="hidden"></div>

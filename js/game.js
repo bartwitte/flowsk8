@@ -2,6 +2,7 @@
 // met street skills (echt gelande, gefilmde tricks).
 import { getStreetSkills, checkReq, describeReq } from './skills.js';
 import { GEAR, GAME_TRICKS, getSetup, saveSetup, itemById, isUnlocked, validSetup, computeStats } from './gear.js';
+import { initPark, enterPark, leavePark } from './park.js';
 
 export const LEVELS = [
   { nr: 1, naam: 'Parkeerplaats', doel: 300, obstakels: ['pylon'], speedMult: 1.0, req: null },
@@ -424,9 +425,20 @@ function renderSkills() {
   });
 }
 
+function showMode(m) {
+  stopGame();
+  leavePark();
+  document.getElementById('mode-kies').classList.toggle('hidden', !!m);
+  document.getElementById('run-mode').classList.toggle('hidden', m !== 'run');
+  document.getElementById('skate-battle').classList.add('hidden');
+  if (m === 'run') renderLevels();
+  if (m === 'park') enterPark(skills);
+  else document.getElementById('park-mode').classList.add('hidden');
+}
+
 export async function refreshGame() {
   skills = await getStreetSkills();
-  stopGame();
+  showMode(null);
   renderSetup();
   renderSkills();
 }
@@ -452,9 +464,15 @@ export function initGame() {
       for (const view of ['spelen', 'setup', 'skills']) {
         document.getElementById(`game-view-${view}`).classList.toggle('hidden', view !== chip.dataset.view);
       }
-      if (chip.dataset.view !== 'spelen') stopGame();
+      if (chip.dataset.view !== 'spelen') { stopGame(); leavePark(); }
     });
   });
+
+  initPark();
+  document.getElementById('mode-run').addEventListener('click', () => showMode('run'));
+  document.getElementById('mode-park').addEventListener('click', () => showMode('park'));
+  document.getElementById('run-terug').addEventListener('click', () => showMode(null));
+  document.getElementById('park-terug').addEventListener('click', () => showMode(null));
 
   // besturing
   els.canvas.addEventListener('pointerdown', e => { e.preventDefault(); jump(); });

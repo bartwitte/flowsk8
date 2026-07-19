@@ -6,9 +6,12 @@ export async function getStreetSkills() {
   const clips = await getAllClips();
   const landed = clips.filter(c => c.landed);
   const byTrick = {};
-  for (const c of landed) {
+  const totalByTrick = {}; // alle pogingen (ook niet geland) — voor cleanheid
+  for (const c of clips) {
     const t = (c.trick || '').toLowerCase().trim();
-    if (t) byTrick[t] = (byTrick[t] || 0) + 1;
+    if (!t) continue;
+    totalByTrick[t] = (totalByTrick[t] || 0) + 1;
+    if (c.landed) byTrick[t] = (byTrick[t] || 0) + 1;
   }
   const obstacles = new Set(landed.map(c => c.obstacle).filter(Boolean));
   const names = Object.keys(byTrick);
@@ -16,6 +19,7 @@ export async function getStreetSkills() {
     landedCount: landed.length,
     distinct: names,
     byTrick,
+    totalByTrick,
     obstacles,
     hasTrick: name => names.some(t => t.includes(name)),
     hasGrind: () =>

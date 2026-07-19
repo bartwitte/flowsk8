@@ -23,6 +23,13 @@
 - [x] Unlock-melding na het opslaan van een gelande clip
 - [ ] Game op Willems iPhone testen (touch-besturing)
 
+## v3 — Mega Skatepark (19 juli, Willems idee)
+- [x] Top-down skatepark om in rond te lopen (bowl, halfpipe, rails, funbox)
+- [x] Tricklist uit echte clips; kans uit aantal clips + cleanheid (geland/pogingen)
+- [x] Game of SKATE tegen Bram → Sanne → Pro Pim (letters, beurten, winst unlockt volgende)
+- [x] Sw-precache-fix: altijd vers van netwerk
+- [ ] Joystick-gevoel op echte iPhone testen
+
 ## Later (ideeën)
 - [ ] Slow-motion afspelen bij het editen
 - [ ] Spots (plekken) als extra label
